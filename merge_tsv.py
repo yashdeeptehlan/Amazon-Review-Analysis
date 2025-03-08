@@ -26,34 +26,34 @@ df_merged = pd.concat([df_elec, df_books, df_watches], ignore_index=True)
 print("Merged data shape:", df_merged.shape)
 
 # Optionally, save the merged file to disk for record keeping
-merged_file = "/Users/user/Downloads/amazon_reviews_merged.tsv"
+merged_file = "/Users/user/Documents/BigDataProject/tsv_files/amazon_reviews_merged.tsv"
 df_merged.to_csv(merged_file, sep="\t", index=False)
 print("Merged file saved to", merged_file)
 
-# Step 3: SQL Server connection details
-server = "localhost,1433"   # Using comma to separate host and port
-database = "AmazonReviews"
-username = "sa"
-password = "Strong@Pass123"   # Update if necessary
+# # Step 3: SQL Server connection details
+# server = "localhost,1433"   # Using comma to separate host and port
+# database = "AmazonReviews"
+# username = "sa"
+# password = "Strong@Pass123"   # Update if necessary
 
-# Construct connection string using URL encoding, with increased timeout
-params = urllib.parse.quote_plus(
-    f"DRIVER={{ODBC Driver 17 for SQL Server}};"
-    f"SERVER={server};"
-    f"DATABASE={database};"
-    f"UID={username};"
-    f"PWD={password};"
-    f"Connection Timeout=120;"
-)
-connection_string = f"mssql+pyodbc:///?odbc_connect={params}"
+# # Construct connection string using URL encoding, with increased timeout
+# params = urllib.parse.quote_plus(
+#     f"DRIVER={{ODBC Driver 17 for SQL Server}};"
+#     f"SERVER={server};"
+#     f"DATABASE={database};"
+#     f"UID={username};"
+#     f"PWD={password};"
+#     f"Connection Timeout=120;"
+# )
+# connection_string = f"mssql+pyodbc:///?odbc_connect={params}"
 
-print("Connecting to SQL Server with connection string:")
-print(connection_string)
+# print("Connecting to SQL Server with connection string:")
+# print(connection_string)
 
-# Step 4: Create the SQLAlchemy engine
-engine = create_engine(connection_string)
+# # Step 4: Create the SQLAlchemy engine
+# engine = create_engine(connection_string)
 
-# Step 5: Insert the merged DataFrame into a new table 'AmazonReviews_Merged'
-print("Inserting merged data into SQL Server table 'AmazonReviews_Merged'...")
-df_merged.to_sql("AmazonReviews_Merged", engine, if_exists="replace", index=False, chunksize=1000)
-print("Merged data successfully loaded into SQL Server!")
+# # Step 5: Insert the merged DataFrame into a new table 'AmazonReviews_Merged'
+# print("Inserting merged data into SQL Server table 'AmazonReviews_Merged'...")
+# df_merged.to_sql("AmazonReviews_Merged", engine, if_exists="replace", index=False, chunksize=1000)
+# print("Merged data successfully loaded into SQL Server!")
